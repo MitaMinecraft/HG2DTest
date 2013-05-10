@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Mäx
@@ -5,13 +8,7 @@
  * Time: 21:23
  * To change this template use File | Settings | File Templates.
  */
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import javax.imageio.*;
+
 public class HG2DGame  extends JFrame {
     private Container c;
     private int x, y, w, h;

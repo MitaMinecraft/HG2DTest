@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Mäx
@@ -5,10 +8,7 @@
  * Time: 21:13
  * To change this template use File | Settings | File Templates.
  */
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
+
 public class HG2DStartMenu extends JFrame {
     private Container c;
     private JButton startGameBtn;
