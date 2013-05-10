@@ -1,0 +1,6 @@
+Here's how you create a .map file:
+The first line is the x and y coord of the starting point of the player. 0 0 is top left, 0 9 is bottom left, 9 0 is top right and 9 9 is bottom right
+The second line specifies which tile should be drawn into the upper left corner of the map. This is for larger maps and should be 0 0 for now until I enable support for larger maps
+The following 10 lines should each contain 10 numbers, seperated by a space. Each number stands for a tile, which number you have to use can be found in GameTile.java
+A number followed by a colon and text (1:test) will display the tile according to the number and when the player steps on that tile the map test.map will be loaded.
+two numbers separated by a dot will be an item lying on a tile. so when the player steps on it, the item will be picked up and the tile underneath will be displayed. 3.4 would be tile 3 with item 4. NOT implemented yet! but i'm currently doing testing with the STITCHEDTILE!
