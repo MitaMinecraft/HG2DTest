@@ -17,7 +17,6 @@ public class GameTile extends JLabel {
     public static final int GRASSTILE = 1;
 	public static final int HOUSETILE = 2;
 	public static final int DOORTILE = 3;
-	public static final int STITCHEDTILE = 4;
     private int posX, posY;
 
     public int getPosX() {
@@ -44,35 +43,41 @@ public class GameTile extends JLabel {
     public void setType(int t) {
          loadType(t);
     }
+	public void setDoubleTile(int btm, int top) {
+		try{
+			BufferedImage img = ImageIO.read(new File(getTileFilePath(btm)));
+			img.createGraphics().drawImage(img, 0, 0, null);
+			img.createGraphics().drawImage(ImageIO.read(new File(getTileFilePath(top))), 0, 0, null);
+			this.setIcon(new ImageIcon(img));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    private void loadType(int t) {
+    private String getTileFilePath(int t) {
+	    String n = "";
+	    switch (t) {
+		    case DEFAULTTILE:
+			    n = "img/DefaultTile.png";
+			    break;
+		    case GRASSTILE:
+			    n = "img/DefImage.png";
+			    break;
+		    case PLAYER:
+			    n = "img/PlayerTile.png";
+			    break;
+		    case HOUSETILE:
+			    n = "img/HouseTile.png";
+			    break;
+		    case DOORTILE:
+			    n = "img/DoorTile.png";
+			    break;
+	    }
+	    return n;
+    }
+	private void loadType(int t) {
         try {
-            switch (t) {
-                case DEFAULTTILE:
-                    this.setIcon(new ImageIcon(ImageIO.read(new File("img/DefaultTile.png"))));
-                    break;
-                case GRASSTILE:
-                    this.setIcon(new ImageIcon(ImageIO.read(new File("img/DefImage.png"))));
-                    break;
-                case PLAYER:
-                    this.setIcon(new ImageIcon(ImageIO.read(new File("img/PlayerTile.png"))));
-                    break;
-	            case HOUSETILE:
-		            this.setIcon(new ImageIcon(ImageIO.read(new File("img/HouseTile.png"))));
-		            break;
-	            case DOORTILE:
-		            this.setIcon(new ImageIcon(ImageIO.read(new File("img/DoorTile.png"))));
-		            break;
-	            case STITCHEDTILE:
-		            //this is a test to lay one image over another. can be used for items which include transparency, so that the ground-tile shines through
-		            BufferedImage img = ImageIO.read(new File("img/DefImage.png"));
-		            img.createGraphics().drawImage(img, 0, 0, null);
-		            img.createGraphics().drawImage(ImageIO.read(new File("img/DoorTile.png")), 0, 0, null);
-		            this.setIcon(new ImageIcon(img));
-		            break;
-                default:
-                    System.out.println("This type of gametile doesn't exist");
-            }
+	        this.setIcon(new ImageIcon(ImageIO.read(new File(getTileFilePath(t)))));
         } catch (Exception e) {
             System.out.println(e);
         }

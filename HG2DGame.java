@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Mäx
@@ -8,6 +5,8 @@ import java.awt.*;
  * Time: 21:23
  * To change this template use File | Settings | File Templates.
  */
+import javax.swing.*;
+import java.awt.*;
 
 public class HG2DGame  extends JFrame {
     private Container c;
@@ -48,14 +47,21 @@ public class HG2DGame  extends JFrame {
         }
         this.setVisible(true);
     }
-    public void dispMap(int[][] map) {
+    public void dispMap(float [][] map) {
         if ((map.length != tiles.length) || (map[0].length != tiles[0].length)) {
             System.out.print("Error, wrong map size");
             return;
         }
-        for (int i = 0; i < tiles.length; i++) {
+	    String[] s = {""};
+	    for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                tiles[i][j].setType(map[i][j]);
+                //;
+	            s = Float.toString(map[i][j]).split("\\."); //Fuck regex!
+	            if(s.length < 2 || s[1].equals("0")) {
+		            tiles[i][j].setType((int) map[i][j]);
+	            } else {
+		            tiles[i][j].setDoubleTile(Integer.parseInt(s[0]), Integer.parseInt(s[1]));
+	            }
             }
         }
     }

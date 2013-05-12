@@ -11,8 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 public class Maps {
-    public static int[][] loadMap(String mapName, int[] topLeft) {
-	    int[][] map = new int[10][10];
+    public static float[][] loadMap(String mapName, int[] topLeft) {
+	    float [][] map = new float[10][10];
 	    try {
 		    BufferedReader in = new BufferedReader(new FileReader("maps/" + mapName + ".map"));
 		    String[] line = {in.readLine()};
@@ -25,7 +25,7 @@ public class Maps {
 			    line[0] = in.readLine();
 			    line = line[0].split(" ");
 			    for (int j = topLeft[0]; j < map[i].length+topLeft[0]; j++) {
-				    map[ctrX][ctrY] = Integer.parseInt(line[j].split(":")[0]);
+				    map[ctrX][ctrY] = Float.parseFloat(line[j].split(":")[0]);
 				    ctrX++;
 			    }
 			    ctrX = 0;
