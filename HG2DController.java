@@ -16,8 +16,10 @@ public class HG2DController implements ActionListener, KeyListener {
     private GameTile player;
 	private String currentMap;
 	private boolean needMapReload;
+	HG2DInventory inv;
     public void startGame() {
         sm = new HG2DStartMenu(this);
+	    inv = new HG2DInventory(this);
     }
     public void actionPerformed(ActionEvent ae) {
         Object src = ae.getSource();
@@ -26,27 +28,34 @@ public class HG2DController implements ActionListener, KeyListener {
         }
     }
 
+	private void openInventory() {
+		inv.showInv();
+	}
+
     public void keyReleased(KeyEvent ke) {
         int c = ke.getKeyCode();
         int x = player.getPosX();
 	    int y = player.getPosY();
 	    switch (c) {
-            case 37:
+            case KeyEvent.VK_LEFT:
                 //Left
 	            x--;
                 break;
-            case 38:
+            case  KeyEvent.VK_UP:
                 //Up
 	            y--;
                 break;
-            case 39:
+            case  KeyEvent.VK_RIGHT:
                 //Right
 	            x++;
                 break;
-            case 40:
+            case  KeyEvent.VK_DOWN:
                 //Down
 	            y++;
                 break;
+            case KeyEvent.VK_I:
+		        //Inventory
+		        openInventory();
         }
 	    String tmp = Maps.getMapTransfer(currentMap, new int[] {x, y});
 	    if(!tmp.equals("")) {
