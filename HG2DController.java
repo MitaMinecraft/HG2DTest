@@ -73,14 +73,14 @@ public class HG2DController implements ActionListener, KeyListener {
     }
     private void newGame() {
 	    sm.dispose();
-        game = new HG2DGame();
+        game = new HG2DGame(this);
 	    currentMap = "testmap";
         game.setSize((int) (game.getSize().getWidth()+800-game.getContentPane().getSize().getWidth()),(int) (game.getSize().getHeight()+800-game.getContentPane().getSize().getHeight()));  //Necessary due to window decorations
         player = game.getPlayer();
 	    int[] mapStart = Maps.getMapStart(currentMap);
 	    int[] startPos = Maps.getStartPos(currentMap);
         player.setPos(startPos[0]-mapStart[0], startPos[1]-mapStart[1]);
-        game.dispMap(Maps.loadMap(currentMap, mapStart));
+        game.dispMap(Maps.loadMap(currentMap, mapStart), currentMap);
         game.addKeyListener(this);
     }
 	private int[] doMapShift(int[] pos) {
@@ -93,9 +93,12 @@ public class HG2DController implements ActionListener, KeyListener {
 			int[] mapStart = Maps.getMapStart(currentMap);
 			int[] startPos = Maps.getStartPos(currentMap);
 			pos = new int[]{startPos[0]-mapStart[0], startPos[1]-mapStart[1]};
-			game.dispMap(Maps.loadMap(currentMap, mapStart));
+			game.dispMap(Maps.loadMap(currentMap, mapStart), currentMap);
 			needMapReload = false;
 		}
 		return pos;
+	}
+	public boolean isItemStillThere(String mapName, int x, int y) {
+		return true; //Needs to be implemented server-client-style
 	}
 }

@@ -14,17 +14,19 @@ public class HG2DGame  extends JFrame {
     private static final int tileW = 80, tileH = 80;
     private GameTile[][] tiles = new GameTile[10][10];
     private GameTile player = new GameTile(GameTile.PLAYER);
+	private HG2DController ctrl;
 
     public GameTile getPlayer() {
         return player;
     }
 
-    public HG2DGame() {
-        super("HGTest: View from above; Game");
+    public HG2DGame(HG2DController controller) {
+        super("HG2D");
         c = this.getContentPane();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
-        x = 200;
+        ctrl = controller;
+	    x = 200;
         y = 200;
         w = 800;
         h = 800;
@@ -47,7 +49,7 @@ public class HG2DGame  extends JFrame {
         }
         this.setVisible(true);
     }
-    public void dispMap(float [][] map) {
+    public void dispMap(float [][] map, String mapName) {
         if ((map.length != tiles.length) || (map[0].length != tiles[0].length)) {
             System.out.print("Error, wrong map size");
             return;
@@ -55,14 +57,20 @@ public class HG2DGame  extends JFrame {
 	    String[] s = {""};
 	    for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                //;
 	            s = Float.toString(map[i][j]).split("\\."); //Fuck regex!
 	            if(s.length < 2 || s[1].equals("0")) {
 		            tiles[i][j].setType((int) map[i][j]);
 	            } else {
-		            tiles[i][j].setDoubleTile(Integer.parseInt(s[0]), Integer.parseInt(s[1]));
+		            checkItemTile(tiles[i][j], s, mapName, i, j);
 	            }
             }
         }
     }
+	public void checkItemTile(GameTile t, String[] s, String map, int x, int y) {
+		if(ctrl.isItemStillThere(map, x, y)) {
+			t.setDoubleTile(Integer.parseInt(s[0]), Integer.parseInt(s[1]));
+		} else {
+			t.setType(Integer.parseInt(s[0]));
+		}
+	}
 }

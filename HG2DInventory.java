@@ -16,6 +16,7 @@ import java.awt.event.KeyListener;
 public class HG2DInventory extends JFrame implements KeyListener{
 	private HG2DController ctrl;
 	private Container c;
+	HG2DInvData d;
 	int x, y, w, h;
 
 	public void keyReleased(KeyEvent ke) {
@@ -40,7 +41,7 @@ public class HG2DInventory extends JFrame implements KeyListener{
 		this.setResizable(false);
 		addKeyListener(this);
 
-		HG2DInvData d = new HG2DInvData();
+		d = new HG2DInvData();
 	}
 
 	public  void showInv() {

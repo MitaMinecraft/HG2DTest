@@ -5,14 +5,19 @@
  * Time: 21:23
  * To change this template use File | Settings | File Templates.
  */
-import java.net.URL;
-import java.util.Iterator;
 
 public class HG2DInvData {
-	HG2DItem[] itemID;
-	int[] amounts;
+	private HG2DItem[] items;
+	private int[] amounts;
+	private final int maxItems = 10;
 
 	public HG2DInvData() {
+		amounts = new int[maxItems];
+		items = new HG2DItem[maxItems];
 
+		for (int i = 0; i < maxItems; i++) {
+			amounts[i] = 0;
+			items[i] = new HG2DItem(-1); //Empty item, since in the beginning you don't have any items!
+		}
 	}
 }
